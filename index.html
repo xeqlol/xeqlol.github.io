@@ -603,7 +603,7 @@
   </nav>
 
   <!-- Header -->
-  <header>
+  <header id="profile">
     <div class="container">
       <img src="photo.jpg" alt="Profile photo" class="profile-photo">
       <h1>Senior/Staff Frontend Architect &amp; Platform Engineer</h1>
@@ -622,7 +622,7 @@
   </header>
 
   <!-- Profile -->
-  <section id="profile">
+  <section>
     <div class="container">
       <h2>Профиль</h2>
       <p class="profile-intro">
@@ -1097,32 +1097,35 @@
 
     // Scroll spy for TOC
     (function() {
-      const sections = document.querySelectorAll('section[id]');
       const tocLinks = document.querySelectorAll('.toc a');
-
+      
       function setActiveLink() {
         const scrollY = window.scrollY;
-        let currentSectionId = null;
+        let currentId = null;
 
-        // Find the section whose top is closest to viewport top (but not above it)
-        // or the section that is currently visible
-        for (let i = 0; i < sections.length; i++) {
-          const section = sections[i];
-          const rect = section.getBoundingClientRect();
-          const sectionTop = rect.top + scrollY;
-          const sectionBottom = sectionTop + section.offsetHeight;
+        // Check each TOC link's target
+        for (let i = 0; i < tocLinks.length; i++) {
+          const link = tocLinks[i];
+          const targetId = link.getAttribute('href').substring(1);
+          const target = document.getElementById(targetId);
+          
+          if (target) {
+            const rect = target.getBoundingClientRect();
+            const targetTop = rect.top + scrollY;
+            const targetBottom = targetTop + target.offsetHeight;
 
-          // Check if this section is currently in view
-          if (scrollY + 150 >= sectionTop && scrollY + 150 < sectionBottom) {
-            currentSectionId = section.getAttribute('id');
-            break;
+            // Check if this section is currently in view (with offset for fixed header)
+            if (scrollY + 150 >= targetTop && scrollY + 150 < targetBottom) {
+              currentId = targetId;
+              break;
+            }
           }
         }
 
         // Update active state
         tocLinks.forEach(link => {
           link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + currentSectionId) {
+          if (link.getAttribute('href') === '#' + currentId) {
             link.classList.add('active');
           }
         });
