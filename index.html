@@ -872,7 +872,7 @@
   <!-- Competencies -->
   <section id="competencies">
     <div class="container">
-      <h2>Core Competencies</h2>
+      <h2>Ключевые навыки</h2>
       <div class="competencies-grid">
         <div class="competency-card">
           <h4>Architecture &amp; Platform</h4>
@@ -897,11 +897,24 @@
       </div>
 
       <h3 style="margin-top: 40px;">Технологии</h3>
-      <p style="margin-top: 16px; color: var(--text-muted);">
-        React ecosystem, TypeScript, SSR, Microfrontends, Platform Engineering, Kubernetes, CI/CD,
-        Monitoring &amp; Observability, Grafana, S3/CDN, WebView, PWA, Technical Architecture,
-        Reliability Engineering, Delivery Management, Technical Documentation
-      </p>
+      <div class="specialization" style="margin-top: 16px;">
+        <span class="tag">React ecosystem</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">SSR</span>
+        <span class="tag">Microfrontends</span>
+        <span class="tag">Platform Engineering</span>
+        <span class="tag">Kubernetes</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">Monitoring &amp; Observability</span>
+        <span class="tag">Grafana</span>
+        <span class="tag">S3/CDN</span>
+        <span class="tag">WebView</span>
+        <span class="tag">PWA</span>
+        <span class="tag">Technical Architecture</span>
+        <span class="tag">Reliability Engineering</span>
+        <span class="tag">Delivery Management</span>
+        <span class="tag">Technical Documentation</span>
+      </div>
     </div>
   </section>
 
@@ -1101,37 +1114,36 @@
       
       function setActiveLink() {
         const scrollY = window.scrollY;
-        const viewportBottom = scrollY + window.innerHeight;
+        const viewportHeight = window.innerHeight;
+        const viewportBottom = scrollY + viewportHeight;
+        const docHeight = document.documentElement.scrollHeight;
         let currentId = null;
-        let lastVisibleId = null;
 
-        // Check each TOC link's target
-        for (let i = 0; i < tocLinks.length; i++) {
-          const link = tocLinks[i];
-          const targetId = link.getAttribute('href').substring(1);
-          const target = document.getElementById(targetId);
-          
-          if (target) {
-            const rect = target.getBoundingClientRect();
-            const targetTop = rect.top + scrollY;
-            const targetBottom = targetTop + target.offsetHeight;
+        // Check if we're at the bottom of the page
+        const isAtBottom = viewportBottom >= docHeight - 50;
+        
+        // If at bottom, highlight the last TOC item
+        if (isAtBottom) {
+          const lastLink = tocLinks[tocLinks.length - 1];
+          currentId = lastLink.getAttribute('href').substring(1);
+        } else {
+          // Otherwise find the section in view
+          for (let i = 0; i < tocLinks.length; i++) {
+            const link = tocLinks[i];
+            const targetId = link.getAttribute('href').substring(1);
+            const target = document.getElementById(targetId);
+            
+            if (target) {
+              const rect = target.getBoundingClientRect();
+              const targetTop = rect.top + scrollY;
+              const targetBottom = targetTop + target.offsetHeight;
 
-            // Track the last section that has started
-            if (scrollY + 100 >= targetTop) {
-              lastVisibleId = targetId;
-            }
-
-            // Check if this section is currently in view (with offset for fixed header)
-            if (scrollY + 100 >= targetTop && scrollY + 100 < targetBottom) {
-              currentId = targetId;
-              break;
+              if (scrollY + 100 >= targetTop && scrollY + 100 < targetBottom) {
+                currentId = targetId;
+                break;
+              }
             }
           }
-        }
-
-        // If we're at the bottom of the page, use the last section
-        if (!currentId && lastVisibleId) {
-          currentId = lastVisibleId;
         }
 
         // Update active state
