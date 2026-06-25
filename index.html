@@ -1101,7 +1101,9 @@
       
       function setActiveLink() {
         const scrollY = window.scrollY;
+        const viewportBottom = scrollY + window.innerHeight;
         let currentId = null;
+        let lastVisibleId = null;
 
         // Check each TOC link's target
         for (let i = 0; i < tocLinks.length; i++) {
@@ -1114,12 +1116,22 @@
             const targetTop = rect.top + scrollY;
             const targetBottom = targetTop + target.offsetHeight;
 
+            // Track the last section that has started
+            if (scrollY + 100 >= targetTop) {
+              lastVisibleId = targetId;
+            }
+
             // Check if this section is currently in view (with offset for fixed header)
-            if (scrollY + 150 >= targetTop && scrollY + 150 < targetBottom) {
+            if (scrollY + 100 >= targetTop && scrollY + 100 < targetBottom) {
               currentId = targetId;
               break;
             }
           }
+        }
+
+        // If we're at the bottom of the page, use the last section
+        if (!currentId && lastVisibleId) {
+          currentId = lastVisibleId;
         }
 
         // Update active state
