@@ -1101,20 +1101,23 @@
       const tocLinks = document.querySelectorAll('.toc a');
 
       function setActiveLink() {
-        const scrollY = window.pageYOffset;
+        const scrollY = window.scrollY;
         let currentSectionId = null;
 
-        // Find the section that is currently in view (closest to top but still visible)
-        sections.forEach(section => {
-          const sectionHeight = section.offsetHeight;
-          const sectionTop = section.offsetTop - 100;
-          const sectionBottom = sectionTop + sectionHeight;
-          const sectionId = section.getAttribute('id');
+        // Find the section whose top is closest to viewport top (but not above it)
+        // or the section that is currently visible
+        for (let i = 0; i < sections.length; i++) {
+          const section = sections[i];
+          const rect = section.getBoundingClientRect();
+          const sectionTop = rect.top + scrollY;
+          const sectionBottom = sectionTop + section.offsetHeight;
 
-          if (scrollY >= sectionTop && scrollY < sectionBottom) {
-            currentSectionId = sectionId;
+          // Check if this section is currently in view
+          if (scrollY + 150 >= sectionTop && scrollY + 150 < sectionBottom) {
+            currentSectionId = section.getAttribute('id');
+            break;
           }
-        });
+        }
 
         // Update active state
         tocLinks.forEach(link => {
