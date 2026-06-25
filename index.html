@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV — Senior/Staff Frontend Architect & Platform Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* New palette */
+      --graphite: #353535;
+      --stormy-teal: #3c6e71;
+      --white: #ffffff;
+      --alabaster: #d9d9d9;
+      --yale-blue: #284b63;
+      
+      --bg: var(--white);
+      --bg-alt: #f5f5f5;
+      --text: var(--graphite);
+      --text-muted: var(--stormy-teal);
+      --text-light: var(--alabaster);
+      --accent: var(--stormy-teal);
+      --accent-soft: var(--alabaster);
+      --border: #e0e0e0;
+      --card-bg: rgba(60, 110, 113, 0.04);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* Animated Background */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      #bg-canvas {
+        opacity: 0.6;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Table of Contents */
+    .toc {
+      position: fixed;
+      top: 50%;
+      left: 24px;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toc a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      text-decoration: none;
+    }
+
+    .toc a .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--alabaster);
+      border: 2px solid var(--stormy-teal);
+      transition: all 0.3s ease;
+    }
+
+    .toc a .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--stormy-teal);
+      white-space: nowrap;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+
+    .toc a:hover .dot {
+      background: var(--stormy-teal);
+      border-color: var(--yale-blue);
+    }
+
+    .toc a:hover .label {
+      opacity: 1;
+      color: var(--yale-blue);
+    }
+
+    .toc a.active .dot {
+      width: 12px;
+      height: 12px;
+      background: var(--yale-blue);
+      border-color: var(--graphite);
+    }
+
+    .toc a.active .label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      opacity: 1;
+      color: var(--graphite);
+    }
+
+    @media (max-width: 1100px) {
+      .toc {
+        display: none;
+      }
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+      padding: 80px 0 60px;
+    }
+
+    header h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.3;
+      color: var(--text);
+    }
+
+    header .subtitle {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-bottom: 32px;
+    }
+
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--stormy-teal);
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(60, 110, 113, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 40px rgba(60, 110, 113, 0.3);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .contact-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.25s ease;
+      background: var(--bg);
+    }
+
+    .contact-links a:hover {
+      border-color: var(--stormy-teal);
+      color: var(--white);
+      background: var(--stormy-teal);
+    }
+
+    .contact-links .salary {
+      background: var(--bg-alt);
+      border: 1px solid var(--stormy-teal);
+      color: var(--stormy-teal);
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+    }
+
+    section:nth-child(odd) {
+      background: var(--bg);
+    }
+
+    section:nth-child(even) {
+      background: linear-gradient(180deg, var(--bg-alt) 0%, rgba(217, 217, 217, 0.2) 100%);
+    }
+
+    section#experience {
+      background: linear-gradient(180deg, rgba(60, 110, 113, 0.06) 0%, var(--bg) 100%);
+    }
+
+    section#competencies {
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(60, 110, 113, 0.04) 100%);
+    }
+
+    section#achievements {
+      background: linear-gradient(180deg, rgba(40, 75, 99, 0.04) 0%, var(--bg) 100%);
+    }
+
+    h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+      color: var(--text);
+    }
+
+    h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    /* Profile */
+    .profile-intro {
+      font-size: 1.0625rem;
+      margin-bottom: 24px;
+      color: var(--text-muted);
+    }
+
+    .specialization {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+      margin: 24px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      background: var(--bg-alt);
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+    }
+
+    .tag:hover {
+      border-color: var(--stormy-teal);
+      background: rgba(60, 110, 113, 0.08);
+    }
+
+    /* Experience */
+    .job {
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .job:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .job-header {
+      margin-bottom: 20px;
+    }
+
+    .job-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .job-company {
+      font-weight: 500;
+      color: var(--stormy-teal);
+    }
+
+    .job-meta {
+      font-size: 0.8125rem;
+      color: var(--yale-blue);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .job-description {
+      margin-bottom: 20px;
+      color: var(--text-muted);
+    }
+
+    .job-section {
+      margin-bottom: 20px;
+    }
+
+    .job-section h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--stormy-teal);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+    }
+
+    ul li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--stormy-teal);
+    }
+
+    /* Competencies */
+    .competencies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .competency-card {
+      padding: 20px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .competency-card:hover {
+      border-color: var(--stormy-teal);
+      transform: translateY(-2px);
+      background: rgba(60, 110, 113, 0.06);
+    }
+
+    .competency-card h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--stormy-teal);
+    }
+
+    .competency-card p {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Positioning */
+    .positioning-list li {
+      margin-bottom: 12px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-alt);
+      color: var(--text-light);
+      padding: 40px 0;
+      text-align: center;
+      font-size: 0.8125rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--stormy-teal);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: var(--yale-blue);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      header {
+        padding: 40px 0 32px;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        line-height: 1.4;
+      }
+
+      header .subtitle {
+        font-size: 0.9375rem;
+      }
+
+      .profile-photo {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .contact-links a,
+      .contact-links .salary {
+        text-align: center;
+        padding: 10px 14px;
+      }
+
+      section {
+        padding: 32px 0;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+      }
+
+      h3 {
+        font-size: 0.9375rem;
+      }
+
+      .profile-intro {
+        font-size: 0.9375rem;
+      }
+
+      .specialization {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .tag {
+        font-size: 0.8125rem;
+        padding: 6px 12px;
+      }
+
+      .job {
+        margin-bottom: 32px;
+        padding-bottom: 32px;
+      }
+
+      .job-title {
+        font-size: 0.9375rem;
+      }
+
+      .job-company {
+        font-size: 0.9375rem;
+      }
+
+      .job-meta {
+        font-size: 0.75rem;
+      }
+
+      .job-description {
+        font-size: 0.875rem;
+      }
+
+      .job-section h4 {
+        font-size: 0.8125rem;
+      }
+
+      ul li {
+        font-size: 0.875rem;
+        padding-left: 16px;
+      }
+
+      ul li::before {
+        font-size: 0.875rem;
+      }
+
+      .competencies-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .competency-card {
+        padding: 16px;
+      }
+
+      .competency-card h4 {
+        font-size: 0.75rem;
+      }
+
+      .competency-card p {
+        font-size: 0.8125rem;
+      }
+
+      .positioning-list li {
+        font-size: 0.875rem;
+      }
+
+      footer {
+        padding: 32px 0;
+      }
+
+      footer p {
+        font-size: 0.75rem;
+      }
+
+      footer a {
+        display: inline-block;
+        padding: 4px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.25rem;
+      }
+
+      header .subtitle {
+        font-size: 0.875rem;
+      }
+
+      .profile-photo {
+        width: 80px;
+        height: 80px;
+      }
+
+      .contact-links a,
+      .contact-links .salary {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+      }
+
+      h2 {
+        font-size: 1.125rem;
+      }
+
+      .job-section h4 {
+        font-size: 0.75rem;
+      }
+
+      ul li {
+        font-size: 0.8125rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Table of Contents -->
+  <nav class="toc" aria-label="Оглавление">
+    <a href="#profile"><span class="dot"></span><span class="label">Профиль</span></a>
+    <a href="#experience"><span class="dot"></span><span class="label">Опыт</span></a>
+    <a href="#competencies"><span class="dot"></span><span class="label">Навыки</span></a>
+    <a href="#achievements"><span class="dot"></span><span class="label">Достижения</span></a>
+    <a href="#positioning"><span class="dot"></span><span class="label">Предпочтения</span></a>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <img src="photo.jpg" alt="Profile photo" class="profile-photo">
+      <h1>Senior/Staff Frontend Architect &amp; Platform Engineer</h1>
+      <p class="subtitle">
+        Технический лидер с опытом развития крупных web-платформ и продуктовых экосистем. 
+        Специализация: архитектура, platform engineering, reliability, cross-team delivery.
+      </p>
+      <div class="contact-links">
+        <a href="https://t.me/xeqlol" target="_blank" rel="noopener">Telegram: @xeqlol</a>
+        <a href="mailto:xeqlol@gmail.com">xeqlol@gmail.com</a>
+        <a href="https://github.com/xeqlol" target="_blank" rel="noopener">GitHub: @xeqlol</a>
+        <a href="https://www.linkedin.com/in/xeqlol/" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="salary">💰 500–600K ₽ (net, без премии)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Profile -->
+  <section id="profile">
+    <div class="container">
+      <h2>Профиль</h2>
+      <p class="profile-intro">
+        За последние 4 года в Т-Банке прошёл путь от Senior Frontend Engineer до архитектора, 
+        совмещая роли технического лидера, платформенного инженера, архитектора и технического проектного менеджера.
+      </p>
+      
+      <h3>Специализация</h3>
+      <div class="specialization">
+        <span class="tag">Архитектура frontend-платформ</span>
+        <span class="tag">Platform engineering</span>
+        <span class="tag">Техническое лидерство</span>
+        <span class="tag">Cross-team delivery</span>
+        <span class="tag">Observability &amp; reliability</span>
+        <span class="tag">Frontend infrastructure</span>
+        <span class="tag">WebView/PWA</span>
+        <span class="tag">Инженерная культура</span>
+      </div>
+
+      <p style="margin-top: 24px; color: var(--text-muted);">
+        <strong>Сильная сторона</strong> — способность брать ownership за сложные технические инициативы целиком: 
+        от ресерча и архитектуры до организационного запуска, согласования между командами, внедрения процессов и сопровождения эксплуатации.
+      </p>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <h2>Опыт работы</h2>
+
+      <!-- Tinkoff -->
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Staff/Lead Frontend Architect → Platform/Technical Architect</div>
+          <div class="job-company">Tinkoff (Т-Банк)</div>
+          <div class="job-meta">2023 — 2026 · 4 года 1 месяц · Large fintech product ecosystem</div>
+        </div>
+        <p class="job-description">
+          Прошёл путь от Senior Frontend Engineer до архитектора, взяв на себя ответственность за архитектуру 
+          frontend-платформы, технические процессы, reliability, delivery и развитие инженерной культуры.
+        </p>
+
+        <div class="job-section">
+          <h4>Platform Engineering &amp; Architecture</h4>
+          <ul>
+            <li>Участвовал в создании frontend-платформы для продуктовых команд с единым подходом к микрофронтендам, инфраструктуре и delivery</li>
+            <li>Формировал архитектурные подходы для host/microfrontend ecosystem и platform tooling</li>
+            <li>Организовал платформенную команду, процессы взаимодействия, roadmap и delivery flow</li>
+            <li>Участвовал в проектировании frontend infrastructure и load balancing решений совместно с SRE</li>
+            <li>Развивал WebView/PWA architecture и интеграцию web-платформы в mobile ecosystem</li>
+            <li>Формализовывал сложные архитектурные сценарии через technical discovery, схемы и ADR</li>
+          </ul>
+        </div>
+
+        <div class="job-section">
+          <h4>Reliability, Monitoring &amp; Infrastructure</h4>
+          <ul>
+            <li>Построил процессы observability, alerting и incident management для frontend ecosystem</li>
+            <li>Инициировал развитие business monitoring и reliability practices</li>
+            <li>Разработал runbooks, monitoring workflows и operational processes</li>
+            <li>Организовал процессы дежурств и incident response</li>
+            <li>Оптимизировал SSR infrastructure, deployment configuration и utilization</li>
+            <li>Участвовал в масштабировании frontend delivery infrastructure и migration initiatives</li>
+          </ul>
+        </div>
+
+        <div class="job-section">
+          <h4>CI/CD &amp; Developer Experience</h4>
+          <ul>
+            <li>Исследовал bottleneck'ы CI/CD pipelines и оптимизировал build-процессы</li>
+            <li>Ускорил delivery cycle через caching strategies, automation и selective execution flows</li>
+            <li>Развивал developer experience через platform tooling, reusable templates и automation</li>
+            <li>Формировал единые инженерные практики внутри frontend ecosystem</li>
+          </ul>
+        </div>
+
+        <div class="job-section">
+          <h4>Technical Leadership &amp; Engineering Culture</h4>
+          <ul>
+            <li>Организовал регулярные технические встречи и knowledge-sharing процессы</li>
+            <li>Формализовал практики архитектурных обсуждений и технических синхронизаций</li>
+            <li>Координировал технические roadmap'ы, backlog management и cross-team communication</li>
+            <li>Развивал инженерную культуру через mentoring, documentation-first подход и прозрачные процессы</li>
+            <li>Участвовал в найме, технических интервью и развитии инженеров</li>
+            <li>Выступал консультантом по архитектуре, infrastructure, monitoring и delivery</li>
+          </ul>
+        </div>
+
+        <div class="job-section">
+          <h4>Large-Scale Technical Initiatives</h4>
+          <ul>
+            <li>Провёл крупную migration/refactoring initiative с изменением core domain model</li>
+            <li>Координировал взаимодействие frontend, backend и analytics команд в рамках архитектурных изменений</li>
+            <li>Организовывал передачу ownership между командами после организационных изменений</li>
+            <li>Поднимал инфраструктуру, observability и delivery processes для high-priority проектов</li>
+            <li>Сопровождал стратегические инициативы по развитию frontend ecosystem и платформы</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BestDoctor -->
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Senior Frontend Developer</div>
+          <div class="job-company">BestDoctor</div>
+          <div class="job-meta">Июль 2021 — Июнь 2022 · 1 год · Medical &amp; Insurance Company</div>
+        </div>
+        <p class="job-description">
+          Разработка frontend для системы тарификации в ведущей медицинской страховой компании с нуля.
+        </p>
+        <ul>
+          <li>Разрабатывал frontend для системы тарификации на современном React-стеке (React, Effector, Ky, Webpack/Rollup)</li>
+          <li>Настраивал CI/CD конфигурации, оптимизировал скорость загрузки (метрики Lighthouse)</li>
+          <li>Внедрял процесс ежедневных screen share в Jira для синхронизации команды</li>
+          <li>Работал с продуктовым дизайнером над доступностью интерфейсов (FullStory) и автоматизацией рутинных задач</li>
+          <li>Автоматизировал экспорт дизайн-токенов в npm-пакеты, синхронизировал дизайн через Chromatic</li>
+          <li>Изучал Python и backend-технологии с ментором из backend-команды для понимания внутренних процессов</li>
+        </ul>
+      </div>
+
+      <!-- Alfa-Bank Techlead -->
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Frontend Techlead</div>
+          <div class="job-company">Alfa-Bank</div>
+          <div class="job-meta">Март 2021 — Июль 2021 · 5 месяцев · Екатеринбург</div>
+        </div>
+        <ul>
+          <li>Присоединился к команде cash credit, помог увеличить конверсию анкетирования</li>
+          <li>Улучшил метрики Lighthouse основного сайта, переписал CI/CD конфигурации для ускорения пайплайнов</li>
+          <li>Организовал ежедневные meeting screen share для синхронизации команды и обмена проблемами/идеями</li>
+          <li>Внедрил несколько фасилитационных техник для ускорения и повышения консистентности встреч</li>
+          <li>Как Technical Leader интернет-анкет: оптимизировал общий стек, codestyle, gitflow, review flow и knowledge sharing</li>
+          <li>Помогал frontend-инженерам с планами личного развития, техническими целями, решением рутинных проблем (VPN, доступ, конференции)</li>
+        </ul>
+      </div>
+
+      <!-- Alfa-Bank Senior -->
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Senior Frontend Developer</div>
+          <div class="job-company">Alfa-Bank</div>
+          <div class="job-meta">Апрель 2020 — Март 2021 · 1 год · Екатеринбург</div>
+        </div>
+        <ul>
+          <li>Работал в команде основного сайта</li>
+          <li>Участвовал в оптимизации главной страницы</li>
+          <li>Полностью переписал несколько сложных страниц (банкоматы, офисы, специальные продукты) на современный стек</li>
+        </ul>
+      </div>
+
+      <!-- Yandex -->
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Разработчик интерфейсов</div>
+          <div class="job-company">Yandex</div>
+          <div class="job-meta">Октябрь 2018 — Апрель 2020 · 1 год 7 месяцев · Екатеринбург</div>
+        </div>
+        <ul>
+          <li>Работал в инфраструктурной команде Yandex над переписыванием сервисов на новый стек (React/Redux/TypeScript)</li>
+          <li>В команде TurboApp с нуля перестроил сервис погоды и несколько других сервисов на современном SPA-стеке</li>
+        </ul>
+      </div>
+
+      <!-- Apricode -->
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Fullstack Developer</div>
+          <div class="job-company">Apricode</div>
+          <div class="job-meta">Октябрь 2017 — Октябрь 2018 · 1 год 1 месяц · Екатеринбург</div>
+        </div>
+        <ul>
+          <li>Переписывал административную панель с ASP.NET Razor templates на React/Redux/TypeScript SPA</li>
+          <li>Разработал React Native приложение для поиска, добавления, отслеживания и оценки городских событий</li>
+          <li>Помогал стажёрам изучать JavaScript и CSS</li>
+          <li>Работал тимлидом в команде из 4 человек над динамическим конструктором форм для школьных сайтов</li>
+        </ul>
+      </div>
+
+      <!-- Freelance -->
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Freelance Fullstack Engineer</div>
+          <div class="job-company">Self-Employed</div>
+          <div class="job-meta">Апрель 2016 — Сентябрь 2017 · 1 год 6 месяцев</div>
+        </div>
+        <ul>
+          <li>Разрабатывал и поддерживал веб-приложения на стеке ASP.NET/jQuery для различных клиентов</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Competencies -->
+  <section id="competencies">
+    <div class="container">
+      <h2>Core Competencies</h2>
+      <div class="competencies-grid">
+        <div class="competency-card">
+          <h4>Architecture &amp; Platform</h4>
+          <p>Frontend Architecture, Platform Engineering, Microfrontends, SSR, WebView/PWA</p>
+        </div>
+        <div class="competency-card">
+          <h4>Infrastructure &amp; DevOps</h4>
+          <p>Kubernetes, CI/CD, Observability, Monitoring, Performance Optimization</p>
+        </div>
+        <div class="competency-card">
+          <h4>Leadership &amp; Delivery</h4>
+          <p>Technical Leadership, Technical Project Management, Mentorship, Cross-team Coordination</p>
+        </div>
+        <div class="competency-card">
+          <h4>Reliability &amp; Process</h4>
+          <p>Reliability Engineering, Incident Management, Technical Roadmaps, ADR</p>
+        </div>
+        <div class="competency-card">
+          <h4>Product &amp; Discovery</h4>
+          <p>Product-oriented Engineering, Delivery Management, Technical Discovery</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 40px;">Технологии</h3>
+      <p style="margin-top: 16px; color: var(--text-muted);">
+        React ecosystem, TypeScript, SSR, Microfrontends, Platform Engineering, Kubernetes, CI/CD, 
+        Monitoring &amp; Observability, Grafana, S3/CDN, WebView, PWA, Technical Architecture, 
+        Reliability Engineering, Delivery Management, Technical Documentation
+      </p>
+    </div>
+  </section>
+
+  <!-- Key Achievements -->
+  <section id="achievements">
+    <div class="container">
+      <h2>Ключевые достижения</h2>
+      <ul>
+        <li>Вырос от Senior Engineer до архитектурной и платформенной роли с ownership на уровне направления</li>
+        <li>Построил инженерные процессы, используемые несколькими командами</li>
+        <li>Развивал frontend ecosystem как platform/reliability/architecture owner</li>
+        <li>Сформировал процессы observability, incident management и business monitoring</li>
+        <li>Улучшал developer experience и delivery throughput через platform tooling и CI/CD optimization</li>
+        <li>Развивал инженерную культуру через mentoring, technical leadership и knowledge sharing</li>
+        <li>Регулярно выступал драйвером сложных cross-team технических инициатив</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Positioning -->
+  <section id="positioning">
+    <div class="container">
+      <h2>Карьерные предпочтения</h2>
+      <p style="color: var(--text-muted);">
+        Ищу команды и продукты, где инженер может напрямую влиять на пользовательский опыт и развитие продукта, 
+        а обратная связь от пользователей приходит быстро и остаётся осязаемой.
+      </p>
+      
+      <h3 style="margin-top: 24px;">Интересные направления:</h3>
+      <ul class="positioning-list">
+        <li>Образовательные проекты</li>
+        <li>Wellness и ментальное здоровье</li>
+        <li>Игровые проекты (RPG, где команда горит своим делом)</li>
+        <li>Медицина и digital health</li>
+        <li>Инструменты для разработчиков</li>
+        <li>IT-инфраструктура и платформенные решения</li>
+      </ul>
+
+      <h3 style="margin-top: 24px;">Важно:</h3>
+      <ul class="positioning-list">
+        <li>Продукт делается для понятной и конкретной аудитории</li>
+        <li>Есть плотный контакт между инженерами, продуктом и пользователями</li>
+        <li>Инженер участвует не только в реализации, но и в формировании решений</li>
+        <li>Ценятся ownership, инженерная культура и системное мышление</li>
+        <li>Есть возможность активно применять AI-based инструменты и подходы</li>
+      </ul>
+
+      <p style="margin-top: 24px; font-style: italic; color: var(--text-muted);">
+        Наиболее комфортные роли — на пересечении архитектуры, platform engineering, technical leadership и delivery management, 
+        где можно одновременно влиять на техническое качество системы, эффективность команд и ценность продукта.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>
+        <a href="https://t.me/xeqlol" target="_blank" rel="noopener">Telegram</a> · 
+        <a href="mailto:xeqlol@gmail.com">Email</a> · 
+        <a href="https://github.com/xeqlol" target="_blank" rel="noopener">GitHub</a> · 
+        <a href="https://www.linkedin.com/in/xeqlol/" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+      <p style="margin-top: 12px;">
+        © 2026 · d.nemkov/xeqlol
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      let width, height;
+      let particles = [];
+      let mouse = { x: null, y: null, radius: 150 };
+      
+      // Resize canvas
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        initParticles();
+      }
+      
+      // Particle class
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.3;
+          this.vy = (Math.random() - 0.5) * 0.3;
+          this.size = Math.random() * 3 + 2;
+          this.baseX = this.x;
+          this.baseY = this.y;
+          this.density = (Math.random() * 30) + 1;
+          this.alpha = Math.random() * 0.25 + 0.1;
+          this.updateColor();
+        }
+        
+        updateColor() {
+          // Color zones based on vertical position
+          const zoneHeight = height / 5;
+          const zone = Math.floor(this.y / zoneHeight);
+          const colors = [
+            'rgba(217, 217, 217, ',  // #d9d9d9 - alabaster
+            'rgba(60, 110, 113, ',   // #3c6e71 - stormy-teal
+            'rgba(100, 140, 145, ',  // lighter teal blend
+            'rgba(40, 75, 99, ',     // #284b63 - yale-blue
+            'rgba(53, 53, 53, '      // #353535 - graphite
+          ];
+          this.color = colors[Math.min(zone, colors.length - 1)];
+        }
+        
+        draw() {
+          ctx.fillStyle = this.color + this.alpha + ')';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.closePath();
+          ctx.fill();
+        }
+        
+        update() {
+          // Mouse interaction
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          let forceDirectionX = dx / distance;
+          let forceDirectionY = dy / distance;
+          let maxDistance = mouse.radius;
+          let force = (maxDistance - distance) / maxDistance;
+          let directionX = forceDirectionX * force * this.density;
+          let directionY = forceDirectionY * force * this.density;
+          
+          if (distance < mouse.radius) {
+            this.x -= directionX;
+            this.y -= directionY;
+          } else {
+            // Return to base position slowly
+            if (this.x !== this.baseX) {
+              let dx = this.x - this.baseX;
+              this.x -= dx * 0.02;
+            }
+            if (this.y !== this.baseY) {
+              let dy = this.y - this.baseY;
+              this.y -= dy * 0.02;
+            }
+          }
+          
+          // Gentle drift
+          this.x += this.vx;
+          this.y += this.vy;
+          
+          // Update color based on new position
+          this.updateColor();
+          
+          // Wrap around edges
+          if (this.x < 0) this.x = width;
+          if (this.x > width) this.x = 0;
+          if (this.y < 0) this.y = height;
+          if (this.y > height) this.y = 0;
+          
+          this.draw();
+        }
+      }
+      
+      function initParticles() {
+        particles = [];
+        let isMobile = window.innerWidth < 768;
+        let numberOfParticles = Math.floor((width * height) / (isMobile ? 20000 : 12000));
+        for (let i = 0; i < numberOfParticles; i++) {
+          particles.push(new Particle());
+        }
+      }
+      
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+        }
+        
+        // Connect nearby particles
+        connectParticles();
+        
+        requestAnimationFrame(animate);
+      }
+      
+      function connectParticles() {
+        let opacityValue = 1;
+        for (let a = 0; a < particles.length; a++) {
+          for (let b = a; b < particles.length; b++) {
+            let dx = particles[a].x - particles[b].x;
+            let dy = particles[a].y - particles[b].y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 100) {
+              opacityValue = 1 - (distance / 100);
+              // Use color based on average position of the two particles
+              const avgY = (particles[a].y + particles[b].y) / 2;
+              const zoneHeight = height / 5;
+              const zone = Math.floor(avgY / zoneHeight);
+              const zoneColors = [
+                'rgba(217, 217, 217, ',
+                'rgba(60, 110, 113, ',
+                'rgba(100, 140, 145, ',
+                'rgba(40, 75, 99, ',
+                'rgba(53, 53, 53, '
+              ];
+              ctx.strokeStyle = zoneColors[Math.min(zone, zoneColors.length - 1)] + (opacityValue * 0.3) + ')';
+              ctx.lineWidth = 1.5;
+              ctx.beginPath();
+              ctx.moveTo(particles[a].x, particles[a].y);
+              ctx.lineTo(particles[b].x, particles[b].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+      
+      // Mouse move event
+      canvas.addEventListener('mousemove', function(event) {
+        mouse.x = event.x;
+        mouse.y = event.y;
+      });
+      
+      // Mouse leave
+      canvas.addEventListener('mouseleave', function() {
+        mouse.x = null;
+        mouse.y = null;
+      });
+      
+      // Touch support
+      canvas.addEventListener('touchmove', function(event) {
+        mouse.x = event.touches[0].clientX;
+        mouse.y = event.touches[0].clientY;
+      });
+      
+      window.addEventListener('resize', resize);
+      
+      resize();
+      animate();
+    })();
+
+    // Scroll spy for TOC
+    (function() {
+      const sections = document.querySelectorAll('section[id]');
+      const tocLinks = document.querySelectorAll('.toc a');
+
+      function setActiveLink() {
+        const scrollY = window.pageYOffset;
+
+        sections.forEach(section => {
+          const sectionHeight = section.offsetHeight;
+          const sectionTop = section.offsetTop - 150;
+          const sectionId = section.getAttribute('id');
+
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            tocLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + sectionId) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', setActiveLink);
+    })();
+  </script>
+
+</body>
+</html>
