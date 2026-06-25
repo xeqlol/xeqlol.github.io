@@ -1102,19 +1102,25 @@
 
       function setActiveLink() {
         const scrollY = window.pageYOffset;
+        let currentSectionId = null;
 
+        // Find the section that is currently in view (closest to top but still visible)
         sections.forEach(section => {
           const sectionHeight = section.offsetHeight;
-          const sectionTop = section.offsetTop - 150;
+          const sectionTop = section.offsetTop - 100;
+          const sectionBottom = sectionTop + sectionHeight;
           const sectionId = section.getAttribute('id');
 
-          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            tocLinks.forEach(link => {
-              link.classList.remove('active');
-              if (link.getAttribute('href') === '#' + sectionId) {
-                link.classList.add('active');
-              }
-            });
+          if (scrollY >= sectionTop && scrollY < sectionBottom) {
+            currentSectionId = sectionId;
+          }
+        });
+
+        // Update active state
+        tocLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + currentSectionId) {
+            link.classList.add('active');
           }
         });
       }
